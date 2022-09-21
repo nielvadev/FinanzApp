@@ -353,6 +353,11 @@ main {
     width: 3rem;
     height: 3rem;
 }
+.modal .cerrar-modal:hover {
+    cursor: pointer;
+    -webkit-transform:scale(1.1);transform:scale(1.1);
+}
+
 .modal .cerrar-modal img {
     width: 100%;
 }

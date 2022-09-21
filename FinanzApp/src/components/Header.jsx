@@ -1,10 +1,11 @@
 import NuevoPresupuesto from "./NuevoPresupuesto"
+import ControlPresupuesto from "./ControlPresupuesto"
 
 const Header = ({
     presupuesto, 
     setPresupuesto, 
     isValidPresupuesto, 
-    setIsValidPresupuesto}) => {
+    setIsValidPresupuesto,}) => {
 
     return (
         <header>
@@ -12,14 +13,16 @@ const Header = ({
             <a href="https://github.com/nielvadev"><img id="git" src="src\img\gitLogo.png"></img></a>
             <h1>Planificador de gastos</h1>
 
-        <nav class="barra">
+        <nav className="barra">
             <button id="menu">Presupuesto</button>
             <button id="menu">Inicio</button>
             <button id="menu">Balances</button>
             
         </nav>
             {isValidPresupuesto ? (
-                <p>Control Presupuesto</p>
+                <ControlPresupuesto 
+                    presupuesto={presupuesto}
+                />
             ):(
                 <NuevoPresupuesto 
                     presupuesto = {presupuesto}
