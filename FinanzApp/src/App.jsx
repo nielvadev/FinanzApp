@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import Modal from './components/Modal';
+import ListadoGastos from './components/ListadoGastos';
+import { generarId } from './components/helpers';
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
 
 function App() {
@@ -11,12 +13,25 @@ function App() {
     const [modal, setModal] = useState(false)
     const [animarModal, setAnimarModal] = useState(false)
 
+    const [gastos, setGastos] = useState([]);
+
     const handleNuevoGasto = () => {
         setModal(true);
 
         setTimeout(() => {
             setAnimarModal(true)
         }, 400)
+    }
+
+    const guardarGasto = gasto => {
+        gasto.id = generarId();
+        gasto.fecha = Date.now();
+        setGastos([...gastos, gasto])
+
+        setAnimarModal(false);
+        setTimeout(() =>{
+            setModal(false)
+        }, 500)
     }
 
     return (
@@ -27,20 +42,29 @@ function App() {
                 isValidPresupuesto = {isValidPresupuesto}
                 setIsValidPresupuesto = {setIsValidPresupuesto}
                 />
+            
             {isValidPresupuesto && (
-            <div className='nuevo-gasto'>
-                <img
-                    src={IconoNuevoGasto}
-                    alt="Ícono nuevo gasto"  
-                    onClick={handleNuevoGasto}
-                />
-            </div>
+            <>
+                <main>
+                    <ListadoGastos 
+                        gastos={gastos}
+                    />
+                </main>
+                <div className='nuevo-gasto'>
+                    <img
+                        src={IconoNuevoGasto}
+                        alt="Ícono nuevo gasto"  
+                        onClick={handleNuevoGasto}
+                    />
+                </div>
+            </>
             )}
 
             {modal && <Modal 
                         setModal={setModal}
                         animarModal={animarModal}
                         setAnimarModal={setAnimarModal}
+                        guardarGasto={guardarGasto}
                       />}
 
 
