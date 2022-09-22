@@ -1,5 +1,5 @@
 const Gasto = ({gasto}) => {
-    const {categoria} = gasto;
+    const {categoria,nombre,cantidad, id} = gasto;
     return (
         <div className="gasto sombra">
             <div className="contenido-gasto">
@@ -9,6 +9,9 @@ const Gasto = ({gasto}) => {
                     </p>
                     <p className="nombre-gasto">
                         {nombre}
+                    </p>
+                    <p className="cantidad-gasto">
+                        {cantidad}
                     </p>
                 </div>
             </div>
