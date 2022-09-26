@@ -1,5 +1,11 @@
-const ControlPresupuesto = ({presupuesto}) => {
+import { useEffect } from "react";
 
+const ControlPresupuesto = ({gastos, presupuesto}) => {
+
+    useEffect(() => {
+
+    }, [gastos])
+    
     const formatearCantidad = (cantidad) => {
         var formateo = new Intl.NumberFormat('en-US', {
             style: 'currency',
