@@ -7,8 +7,12 @@ import IconoNuevoGasto from './img/nuevo-gasto.svg'
 
 function App() {
      
-    const [gastos, setGastos] = useState([]);
-    const [presupuesto, setPresupuesto] = useState(0);
+    const [gastos, setGastos] = useState([
+        ...(JSON.parse(localStorage.getItem("gastos")) ?? [])
+     ]);
+    const [presupuesto, setPresupuesto] = useState(
+        Number(localStorage.getItem('presupuesto')) ?? 0
+    );
     const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
 
     const [modal, setModal] = useState(false)
@@ -25,6 +29,23 @@ function App() {
         }, 400)
     }
     }, [gastoEditar])
+
+    // Almacenamiento en Local Storage de Presupuesto ↓
+    useEffect(() => {
+        localStorage.setItem('presupuesto', presupuesto ?? 0);
+    }, [presupuesto])
+    
+    useEffect(() => {
+        const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0;
+        if (presupuestoLS !== 0) {
+            setIsValidPresupuesto(true)
+        }
+    }, [])
+    
+    // Almacenamiento en Local Storage de Gastos ↓
+    useEffect(() => {
+        localStorage.setItem('gastos', JSON.stringify(gastos));
+    }, [gastos])
 
 
 
