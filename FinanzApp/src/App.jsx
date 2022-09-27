@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Modal from './components/Modal';
+import Filtro from './components/Filtro';
 import ListadoGastos from './components/ListadoGastos';
 import { generarId } from './components/helpers';
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
@@ -20,6 +21,9 @@ function App() {
 
     const [gastoEditar, setGastoEditar] = useState({})
 
+    const [filtro, setFiltro] = useState('')
+    const [gastosFiltrados, setGastosFiltrados] = useState([''])
+
     useEffect(() => {
         if (Object.keys(gastoEditar).length !== 0) {
             setModal(true);
@@ -29,6 +33,15 @@ function App() {
         }, 400)
     }
     }, [gastoEditar])
+
+    // Filtro de Gastos
+    useEffect(() => {
+        if(filtro){
+            const gastosFiltrados = gastos.filter(gasto => gasto.categoria === filtro);
+            setGastosFiltrados(gastosFiltrados);
+        }
+    }, [filtro])
+
 
     // Almacenamiento en Local Storage de Presupuesto ↓
     useEffect(() => {
@@ -85,6 +98,7 @@ function App() {
         <div className={modal ? 'fijar' : ''}>
             <Header 
                 gastos = {gastos} 
+                setGastos = {setGastos}
                 presupuesto = {presupuesto}
                 setPresupuesto = {setPresupuesto}
                 isValidPresupuesto = {isValidPresupuesto}
@@ -95,10 +109,16 @@ function App() {
             {isValidPresupuesto && (
             <>
                 <main>
+                    <Filtro 
+                        filtro = {filtro}
+                        setFiltro = {setFiltro}
+                    />
                     <ListadoGastos 
                         gastos={gastos}
                         setGastoEditar={setGastoEditar}
                         eliminarGasto={eliminarGasto}
+                        filtro={filtro}
+                        gastosFiltrados={gastosFiltrados}
                     />
                 </main>
                 <div className='nuevo-gasto'>
