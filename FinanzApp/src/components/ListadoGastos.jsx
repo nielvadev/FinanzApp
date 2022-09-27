@@ -7,7 +7,7 @@ const ListadoGastos = ({
     filtro, 
     gastosFiltrados}) => {
   return (
-    <div className="listado-gastos-contenedor">
+    <div className="listado-gastos-contenedor contenedor">
 
         { filtro ? (
                 <>

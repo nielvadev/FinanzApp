@@ -15,12 +15,7 @@ const Header = ({
             <a href="https://github.com/nielvadev"><img id="git" src="src\img\gitLogo.png"></img></a>
             <h1>Planificador de gastos</h1>
 
-        <nav className="barra">
-            <button id="menu">Presupuesto</button>
-            <button id="menu">Inicio</button>
-            <button id="menu">Balances</button>
-            
-        </nav>
+
             {isValidPresupuesto ? (
                 <ControlPresupuesto
                     gastos = {gastos} 
